@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   tools {
-    tool name: 'node236', type: 'nodejs'
+    nodejs 'node236'
   }
   stages {
     stage('VM Node Version') {
