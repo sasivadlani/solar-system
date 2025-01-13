@@ -5,9 +5,9 @@ pipeline {
     nodejs 'node236'
   }
   stages {
-    stage('VM Node Version') {
+    stage('Installing Dependencies') {
       steps {
-        sh 'node -v'
+        sh 'npm install --no-audit'
       }
     }
 
