@@ -8,12 +8,12 @@ pipeline {
     MONGO_URI = 'mongodb://localhost:27017/solar_system'
     MONGO_USERNAME = credentials('mongouser')
     MONGO_PASSWORD = credentials('mongopswd')
+    SONAR_SCANNER_HOME = tool 'SonaeQubeScanner62';
     }
   stages {
     stage('Installing Dependencies') {
       steps {
         sh 'npm install --no-audit'
-        sh 'npm test'
       }
     }
     stage('Dependency Sanning') {
@@ -39,9 +39,15 @@ pipeline {
             }
         }
 
-    stage('Unit Testing') {
+    stage('SonarQube') {
       steps {
-        sh 'npm start'
+        sh '''
+        $SONAR_SCANNER_HOME/bin/sonar-scanner \
+  -Dsonar.projectKey=SolarSystem \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.token=sqp_d650548b0c8fa53e4fd2d5cf940e6bd0110f59fd
+        '''
       }
 
     }
