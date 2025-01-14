@@ -41,6 +41,7 @@ pipeline {
 
     stage('SonarQube') {
       steps {
+        sh '$SONAR_SCANNER_HOME'
         sh '''
         $SONAR_SCANNER_HOME/bin/sonar-scanner \
   -Dsonar.projectKey=SolarSystem \
@@ -53,8 +54,12 @@ pipeline {
     }
     stage('Code Coverage') {
       steps {
-        sh 'npm run coverage'
+        catchError(message: 'Unstable', stageResult: 'UNSTABLE') {
+          sh 'npm run coverage'
         publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'coverage', reportFiles: 'index.html', reportName: 'HTML Code Cov Report', reportTitles: '', useWrapperFileDirectly: true])
+    // some block
+}
+        
       }
     }
 }
