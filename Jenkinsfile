@@ -8,7 +8,6 @@ pipeline {
     stage('Installing Dependencies') {
       steps {
         sh 'npm install --no-audit'
-        sh 'npm audit fix --force'
       }
     }
     stage('Dependency Sanning') {
@@ -29,8 +28,7 @@ pipeline {
                 --format \'ALL\'
                 --prettyPrint''', odcInstallation: 'OWASP-DepCheck12'
                 publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: './', reportFiles: 'dependency-check-jenkins.html', reportName: 'HTML Report DepChkJenk', reportTitles: '', useWrapperFileDirectly: true])
-                junit allowEmptyResults: true, keepProperties: true, stdioRetention: '', testResults: '/*xml'
-            }
+                junit allowEmptyResults: true, keepProperties: true, stdioRetention: '', testResults: 'dependency-check-junit.xml'            }
             }
             }
         }
