@@ -53,6 +53,18 @@ app.post('/planet', function(req, res) {
   });
 });
 
+app.get('/planet/:id', function(req, res) {
+  planetModel.findOne({ id: req.params.id }, function(err, planetData) {
+    if (err) {
+      res.status(500).send("Error retrieving planet data");
+    } else if (!planetData) {
+      res.status(404).send("Planet not found");
+    } else {
+      res.json(planetData);
+    }
+  });
+});
+
 app.get('/planets', function(req, res) {
   planetModel.find({}, function(err, planets) {
     if (err) {
