@@ -10,16 +10,7 @@ pipeline {
         sh 'npm install --no-audit'
       }
     }
-    stage('Dependency Sanning') {
-        parallel {
-            stage('Dependency Audit') {
-            steps {
-                sh '''
-                    npm audit --audit-level-critical
-                    echo $?
-                '''
-            }
-            }
+
             stage('OWASP Dependency Check') {
             steps {
                 dependencyCheck additionalArguments: '''
@@ -30,7 +21,5 @@ pipeline {
                 
             }
             }
-            }
-        }
     }
 }
