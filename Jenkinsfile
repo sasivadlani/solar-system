@@ -5,7 +5,7 @@ pipeline {
     nodejs 'nodejs'
   }
   environment {
-    MONGO_URI = 'mongodb://localhost:27017/admin'
+    MONGO_URI = 'mongodb+srv://sasivadlani9:<db_password>@cluster0.hcvi6.mongodb.net/'
     MONGO_USERNAME = credentials('mongouser')
     MONGO_PASSWORD = credentials('mongopswd')
     }
