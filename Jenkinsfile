@@ -41,7 +41,7 @@ pipeline {
 
     stage('SonarQube') {
       steps {
-        sh '$SONAR_SCANNER_HOME'
+        sh 'echo $SONAR_SCANNER_HOME'
         sh '''
         sonar-scanner \
   -Dsonar.projectKey=SolarSystem \
