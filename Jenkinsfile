@@ -4,6 +4,11 @@ pipeline {
   tools {
     nodejs 'nodejs'
   }
+  environment {
+    MONGODB_URI = 'mongodb://localhost:27017/admin',
+    MONGO_USERNAME = credentials('mongouser'),
+    MONGO_PASSWORD = credentials('mongopswd')
+    }
   stages {
     stage('Installing Dependencies') {
       steps {
@@ -32,5 +37,18 @@ pipeline {
             }
             }
         }
+
+    stage('Unit Testing') {
+      steps {
+        sh 'npm test'
+      }
+
     }
+    stage('Code Coverage') {
+      steps {
+        sh 'npm run coverage'
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'coverage', reportFiles: 'index.html', reportName: 'HTML Code Cov Report', reportTitles: '', useWrapperFileDirectly: true])
+      }
+    }
+}
 }
