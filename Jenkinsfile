@@ -43,7 +43,7 @@ pipeline {
       steps {
         sh '$SONAR_SCANNER_HOME'
         sh '''
-        $SONAR_SCANNER_HOME/bin/sonar-scanner \
+        sonar-scanner \
   -Dsonar.projectKey=SolarSystem \
   -Dsonar.sources=. \
   -Dsonar.host.url=http://localhost:9000 \
