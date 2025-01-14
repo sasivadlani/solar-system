@@ -5,8 +5,8 @@ pipeline {
     nodejs 'nodejs'
   }
   environment {
-    MONGODB_URI = 'mongodb://localhost:27017/admin',
-    MONGO_USERNAME = credentials('mongouser'),
+    MONGODB_URI = 'mongodb://localhost:27017/admin'
+    MONGO_USERNAME = credentials('mongouser')
     MONGO_PASSWORD = credentials('mongopswd')
     }
   stages {
