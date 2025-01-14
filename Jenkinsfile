@@ -36,7 +36,12 @@ pipeline {
                 junit allowEmptyResults: true, keepProperties: true, stdioRetention: '', testResults: 'dependency-check-junit.xml'            }
             }
             }
-        }
+      stage('Run') {
+      steps {
+        sh 'npm start'
+      }
+
+    }
 
     stage('Unit Testing') {
       steps {
@@ -44,6 +49,7 @@ pipeline {
       }
 
     }
+        }
     stage('Code Coverage') {
       steps {
         sh 'npm run coverage'
