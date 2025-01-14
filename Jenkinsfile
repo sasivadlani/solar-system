@@ -10,8 +10,6 @@ pipeline {
         sh 'npm install --no-audit'
       }
     }
-  }
-    stages {
     stage('Dependency Audit') {
       steps {
         sh '''
@@ -20,8 +18,6 @@ pipeline {
           '''
       }
     }
-  }
-  stages {
     stage('OWASP Dependency Check') {
       steps {
         dependencyCheck additionalArguments: '''
@@ -32,5 +28,5 @@ pipeline {
         
       }
     }
-  }
+}
 }
