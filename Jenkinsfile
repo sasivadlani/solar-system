@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   tools {
-    nodejs 'node236'
+    nodejs 'nodejs'
   }
   stages {
     stage('Installing Dependencies') {
