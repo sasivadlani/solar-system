@@ -13,6 +13,7 @@ pipeline {
     stage('Installing Dependencies') {
       steps {
         sh 'npm install --no-audit'
+        sh 'npm start'
       }
     }
     stage('Dependency Sanning') {
