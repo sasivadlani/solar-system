@@ -41,8 +41,8 @@ var dataSchema = new Schema({
 
 var planetModel = mongoose.model('planets', dataSchema);
 
-app.get('/planet/:id', function(req, res) {
-  planetModel.findOne({ id: req.params.id }, function(err, planetData) {
+app.post('/planet', function(req, res) {
+  planetModel.findOne({ id: req.body.id }, function(err, planetData) {
     if (err) {
       res.status(500).send("Error retrieving planet data");
     } else if (!planetData) {
